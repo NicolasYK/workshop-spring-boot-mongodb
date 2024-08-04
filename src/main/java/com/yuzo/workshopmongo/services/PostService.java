@@ -1,0 +1,23 @@
+package com.yuzo.workshopmongo.services;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.yuzo.workshopmongo.domain.Post;
+import com.yuzo.workshopmongo.repository.PostRepository;
+import com.yuzo.workshopmongo.services.exception.ObjectNotFoundException;
+
+@Service
+public class PostService {
+	
+	@Autowired
+	private PostRepository post_repo;
+	
+	public Post findById(String id) {
+		Optional<Post> post = post_repo.findById(id);
+		return post.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+	}
+	
+}
