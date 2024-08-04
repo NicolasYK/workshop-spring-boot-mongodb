@@ -1,5 +1,6 @@
 package com.yuzo.workshopmongo.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,11 @@ public class PostService {
 	}
 	
 	public List<Post> findByTitle(String  text){
-		return post_repo.findByTItlePerson(text);
+		return post_repo.findByTitleContainingIgnoreCase(text);
+	}
+	
+	public List<Post> allSearch(String text, Date minDate, Date maxDate){
+		maxDate = new Date(maxDate.getTime() + 24 * 60 * 60 * 1000);
+		return post_repo.allSearch(text, minDate, maxDate);
 	}
 }
